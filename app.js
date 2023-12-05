@@ -5,50 +5,29 @@ require('dotenv').config();
 
 const app = express(); 
 const PORT = process.env.PORT;
-const path = require('path')
-
-const mongoose = require('mongoose')
-
-const MONGO_DB_URL = process.env.MONGO_DB_URL
-
-mongoose.connect(MONGO_DB_URL,{
-    dbName:'EmployeeDB',
-    useNewUrlParser: true, 
-    useUnifiedTopology: true
-})
-
-.then(()=>{
-    console.log('MongoDB connection success')
-})
-.catch(error=>{
-    console.log('MongoDB coneection is not available'+error)
-})
-
+const path = require('path');
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname,'/build')))
+app.use(express.static(path.join(__dirname, '/build')));
 
+// Middleware order correction
+app.use(morgan('dev'));
+app.use(cors());
 
+// All routes should be included here
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '/build/index.html'));
+});
 
-// allroutes should be included here
-app.get('/*',function(req,res){
-
-    res.sendFile(path.join(__dirname,'/build/index.html'))
-})
-
-
-const userRoute = require('./routes/userRoutes')
-app.use('/api/user',userRoute)
+const userRoute = require('./routes/userRoutes');
+app.use('/api/user', userRoute);
 
 const formRoute = require('./routes/formRoutes');
 app.use('/api/form', formRoute);
 
-app.use(morgan('dev'));
-app.use(cors());
-
-
 app.listen(PORT, () => {
-    console.log(`server is listening on ${PORT}`);
+  console.log(`server is listening on ${PORT}`);
 });
+
