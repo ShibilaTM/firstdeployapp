@@ -22,11 +22,11 @@ app.use('/api/form', formRoute);
 
     res.sendFile(path.join(__dirname,'/build/index.html'))
 })
-const userRoute = require('./routes/userRoutes')
-app.use('/api/user',userRoute)
+// const userRoute = require('./routes/userRoutes')
+// app.use('/api/user',userRoute)
 
-const formRoute = require('./routes/formRoutes');
-app.use('/api/form', formRoute);
+// const formRoute = require('./routes/formRoutes');
+// app.use('/api/form', formRoute);
 
 app.use(morgan('dev'));
 app.use(cors());
