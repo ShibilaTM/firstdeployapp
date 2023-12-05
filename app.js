@@ -16,7 +16,7 @@ const mongoose = require('mongoose');
 
 
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(MONGO_DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB Atlas');
   })
