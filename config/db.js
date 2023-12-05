@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 const MONGO_DB_URL = process.env.MONGO_DB_URL
 
 mongoose.connect(MONGO_DB_URL,{
-    dbName:'EmployeeDB'
+    dbName:'EmployeeDB',
+    useNewUrlParser: true, 
+    useUnifiedTopology: true
 })
 
 .then(()=>{
