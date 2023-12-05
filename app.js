@@ -2,10 +2,28 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
-require('./config/db');
+
 const app = express(); 
 const PORT = process.env.PORT;
 const path = require('path')
+
+const mongoose = require('mongoose')
+
+const MONGO_DB_URL = process.env.MONGO_DB_URL
+
+mongoose.connect(MONGO_DB_URL,{
+    dbName:'EmployeeDB',
+    useNewUrlParser: true, 
+    useUnifiedTopology: true
+})
+
+.then(()=>{
+    console.log('MongoDB connection success')
+})
+.catch(error=>{
+    console.log('MongoDB coneection is not available'+error)
+})
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
