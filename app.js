@@ -12,11 +12,27 @@ app.use(express.urlencoded({extended:true}));
 
 app.use(express.static(path.join(__dirname,'/build')))
 
+const mongoose = require('mongoose');
+
+
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB Atlas');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB Atlas:', error.message);
+  });
+
+
+
+
 // allroutes should be included here
 app.get('/*',function(req,res){
-    
+
     res.sendFile(path.join(__dirname,'/build/index.html'))
 })
+
 
 const userRoute = require('./routes/userRoutes')
 app.use('/api/user',userRoute)
