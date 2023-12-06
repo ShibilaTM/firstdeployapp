@@ -20,7 +20,11 @@ const { MongoClient } = require('mongodb');
 const uri = MONGO_DB_URL
 
 // New options: useNewUrlParser and useUnifiedTopology are no longer needed
-const client = new MongoClient(uri);
+
+const client = new MongoClient(uri, {
+    serverSelectionTimeoutMS: 5000, // Increase the timeout value (in milliseconds)
+    socketTimeoutMS: 45000, // Increase the socket timeout value
+  });
 
 async function connect() {
   try {
