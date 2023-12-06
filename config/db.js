@@ -14,14 +14,22 @@ const MONGO_DB_URL = process.env.MONGO_DB_URL
 // .catch(error=>{
 //     console.log('MongoDB coneection is not available'+error)
 // })
-
 const { MongoClient } = require('mongodb');
 
-const client = new MongoClient(MONGO_DB_URL , { useNewUrlParser: true, useUnifiedTopology: true });
+// Replace the connection string and options with your actual MongoDB connection details
+const uri = MONGO_DB_URL
+
+// New options: useNewUrlParser and useUnifiedTopology are no longer needed
+const client = new MongoClient(uri);
 
 async function connect() {
-  await client.connect();
-  console.log('Connected to MongoDB');
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+  }
 }
 
 connect();
+
