@@ -50,6 +50,8 @@ const MONGO_DB_URL = process.env.MONGO_DB_URL;
 const uri = MONGO_DB_URL;
 
 const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000,
   socketTimeoutMS: 45000,
 });
