@@ -10,14 +10,14 @@ const { connect, client } = require('./config/db');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '/build')));
+
 
 // Middleware order correction
 app.use(morgan('dev'));
 app.use(cors());
 
 
-
+app.use(express.static(path.join(__dirname, '/build')));
 const userRoute = require('./routes/userRoutes');
 app.use('/api/user', userRoute);
 
