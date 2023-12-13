@@ -5,45 +5,48 @@ const cors = require('cors')
 const jwt = require('jsonwebtoken')  // Import jwt module
 
 router.use(cors())
-// function verifytoken(req, res, next) {
-//     try {
-//         const token = req.headers.token;
-//         if (!token) throw 'Token not provided';
-//         let payload = jwt.verify(token, 'reactemployeeapp');
-//         if (!payload) throw 'Token verification failed';
-//         next();
-//     } catch (error) {
-//         res.status(401).json({ error: 'Unauthorized', message: error });
-//     }
-// }
-
 function verifytoken(req, res, next) {
-  try {
-      const authorizationHeader = req.headers.authorization;
-
-      if (!authorizationHeader) {
-          throw 'Authorization header not provided';
-      }
-
-      const tokenParts = authorizationHeader.split(' ');
-
-      if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
-          throw 'Invalid token format';
-      }
-
-      const token = tokenParts[1];
-
-      let payload = jwt.verify(token, 'reactemployeeapp');
-
-      if (!payload) {
-          throw 'Token verification failed';
-      }
-
-      next();
-  } catch (error) {
-      res.status(401).json({ error: 'Unauthorized', message: error });
-  }
+    try {
+        const token = req.headers.token;
+        if (!token) throw 'Token not provided';
+        let payload = jwt.verify(token, 'reactemployeeapp');
+        if (!payload) throw 'Token verification failed';
+        next();
+    } catch (error) {
+        res.status(401).json({ error: 'Unauthorized', message: error });
+    }
 }
+
+// function verifytoken(req, res, next) {
+//   try {
+//       const authorizationHeader = req.headers.authorization;
+//       console.log('Authorization header:', req.headers.authorization);
+
+//       if (!authorizationHeader) {
+//           throw 'Authorization header not provided';
+//       }
+
+//       const tokenParts = authorizationHeader.split(' ');
+
+//       if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
+//           throw 'Invalid token format';
+//       }
+
+//       const token = tokenParts[1];
+//       console.log('Token:', token);
+
+//       let payload = jwt.verify(token, 'reactemployeeapp');
+//       console.log('Payload:', payload);
+
+//       if (!payload) {
+//           throw 'Token verification failed';
+//       }
+
+//       next();
+//   } catch (error) {
+//       res.status(401).json({ error: 'Unauthorized', message: error });
+//   }
+// }
 
 
   
