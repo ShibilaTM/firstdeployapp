@@ -17,9 +17,9 @@ app.use(morgan('dev'));
 app.use(cors());
 
 // All routes should be included here
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.join(__dirname, '/build/index.html'));
-// });
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '/build/index.html'));
+});
 
 const userRoute = require('./routes/userRoutes');
 app.use('/api/user', userRoute);
