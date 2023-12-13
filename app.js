@@ -17,7 +17,7 @@ app.use(morgan('dev'));
 app.use(cors());
 
 
-// app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.static(path.join(__dirname, '/build')));
 const userRoute = require('./routes/userRoutes');
 app.use('/api/user', userRoute);
 
@@ -25,9 +25,9 @@ const formRoute = require('./routes/formRoutes');
 app.use('/api/form', formRoute);
 
 // All routes should be included here
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.join(__dirname, '/build/index.html'));
-// });
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '/build/index.html'));
+});
 
 app.get("/items/:my_item", async (req, res) => {
   let my_item = req.params.my_item;
