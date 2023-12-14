@@ -19,10 +19,10 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, '/build')));
 const userRoute = require('./routes/userRoutes');
-app.use('/api/user', userRoute);
+app.use('/user', userRoute);
 
 const formRoute = require('./routes/formRoutes');
-app.use('/api/form', formRoute);
+app.use('/form', formRoute);
 
 // All routes should be included here
 app.get('/*', function (req, res) {
